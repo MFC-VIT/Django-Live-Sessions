@@ -1,0 +1,26 @@
+{% extends 'firstapp/base.html' %}
+{% block content %}
+
+<div class="container mt-3 bg-light p-3">
+    {% if movies.count == 0 %}
+    <h1>No Movies to Display</h1>
+    {% else %}
+
+    <div class="row">
+        {% for movie in movies %}
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ movie.image.url }}" class="card-img-top" alt="movie_image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.name }}</h5>
+                    <a href="{% url 'firstapp:movie_description' pk=movie.pk %}" class="btn btn-primary">Go to Description</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+</div>
+
+{% endblock %}

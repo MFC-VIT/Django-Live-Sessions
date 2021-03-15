@@ -1,0 +1,54 @@
+{% extends 'firstapp/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="container mt-3 bg-light p-3">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message|safe }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card mb-3">
+                <img src="{{ movie.image.url }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.name }}</h5>
+                    <p class="card-text"><small class="text-muted">{{ movie.dor }}</small></p>
+                    <p class="card-text">{{ movie.description }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <h1>Reviews - </h1>
+            <form action="{% url 'firstapp:add_review' pk=movie.pk %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <div class="mb-3 mt-3">
+                    <button type="submit" class="btn btn-primary mb-3">Submit Review</button>
+                </div>
+            </form>
+
+            <div class="row m-3">
+                {% for rev in movie_reviews %}
+                <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                        <div class="card-header">{{ rev.date }}</div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ rev.user.username }}</h5>
+                            <p class="card-text">{{ rev.review }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
