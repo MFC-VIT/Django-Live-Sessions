@@ -1,0 +1,35 @@
+{% extends 'app1/base.html' %}
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Subject Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for teacher in all_teacher_list %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ teacher.name }}</td>
+          <td>{{ teacher.subject_name }}</td>
+          <td>{{ teacher.email }}</td>
+          <td>{{ teacher.phone }}</td>
+          <td><a href="{% url 'assignment_list' pk=teacher.pk %}" class="btn btn-primary">Assignments</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+  </div>
+</div>
+
+{% endblock %}
