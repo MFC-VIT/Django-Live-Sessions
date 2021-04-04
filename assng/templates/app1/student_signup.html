@@ -1,0 +1,23 @@
+{% extends 'app1/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+
+    {% if registered %}
+    <h1>Thanks For Registering!</h1>
+    {% else %}
+    <h1>Sign Up as a Student</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ student_form|crispy }}
+      {{ user_form|crispy }}
+      <input type="submit" name="" value="Submit" class="btn btn-primary">
+    </form>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}
