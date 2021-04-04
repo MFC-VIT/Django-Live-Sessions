@@ -1,0 +1,21 @@
+{% extends 'app1/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="contianer">
+  <div class="jumbotron">
+    {% if uploaded %}
+    <h1>Assignment Uploaded Successfully!</h1>
+    {% else %}
+    <h1>Upload Your Assignment</h1>
+    <form enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <input type="submit" name="" value="submit" class="btn btn-primary">
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
