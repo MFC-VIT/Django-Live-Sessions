@@ -2,13 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-
 <div class="contianer">
   <div class="jumbotron">
-    {% if uploaded %}
-    <h1>Assignment Uploaded Successfully!</h1>
+    {% if already_submitted %}
+    <h1>You have already submitted your assignment</h1>
     {% else %}
-    <h1>Upload Your Assignment</h1>
+    <h1>Upload Your Submission</h1>
     <form enctype="multipart/form-data" method="post">
       {% csrf_token %}
       {{ form|crispy }}

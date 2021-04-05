@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Student, Teacher, ClassAssignment
+from .models import *
 
 class UserForm(UserCreationForm):
     class Meta():
@@ -21,3 +21,8 @@ class ClassAssignmentForm(forms.ModelForm):
     class Meta():
         model = ClassAssignment
         fields = ['assignment_name','assignment']
+
+class SubmitForm(forms.ModelForm):
+    class Meta():
+        model = SubmitAssignment
+        fields = ['submit']

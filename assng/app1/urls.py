@@ -15,4 +15,6 @@ urlpatterns = [
     path('upload_assignment',views.upload_assignment,name="upload_assignment"),
     path('assignment_list/<int:pk>/',views.assignment_list, name="assignment_list"),
     path('teacher_assignment_list/',views.teacher_assignment_list, name="teacher_assignment_list"),
+    path('submit_assignment/<int:id>',views.submit_assignment, name="submit_assignment"),
+    path('submit_list/<int:id>',views.submit_list, name="submit_list"),
 ]

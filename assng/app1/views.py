@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from .models import User, Student, Teacher, StudentsInClass, ClassAssignment
-from .forms import UserForm, StudentForm, TeacherForm, ClassAssignmentForm
+from .models import *
+from .forms import *
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -124,27 +124,20 @@ def class_teacher_list(request):
 
 @login_required
 def upload_assignment(request):
-    uploaded = False
     teacher = request.user.Teacher
     student_object = StudentsInClass.objects.filter(teacher=teacher)
     student_list = [x.student for x in student_object]
 
     if request.method == "POST":
         form = ClassAssignmentForm(request.POST, request.FILES)
-
         if form.is_valid():
             upload = form.save(commit=False)
             upload.teacher = teacher
             upload.save()
             upload.students.add(*student_list)
-
-            uploaded = True
-
         else:
             print(form.errors)
-    else:
-        form = ClassAssignmentForm()
-    return render(request,'app1/upload_assignment.html',{'uploaded':uploaded,'form':form})
+        return HttpResponseRedirect(reverse('teacher_assignment_list'))
 
 @login_required
 def assignment_list(request,pk):
@@ -156,4 +149,36 @@ def assignment_list(request,pk):
 def teacher_assignment_list(request):
     teacher = request.user.Teacher
     assignment_list = ClassAssignment.objects.filter(teacher=teacher)
-    return render(request,'app1/teacher_assignment_list.html',{'assignment_list':assignment_list})
+    form = ClassAssignmentForm()
+    return render(request,'app1/teacher_assignment_list.html',{'assignment_list':assignment_list,'form':form})
+
+@login_required
+def submit_assignment(request, id=None):
+    student = request.user.Student
+    assignment = get_object_or_404(ClassAssignment, id=id)
+    teacher = assignment.teacher
+    try:
+        get_submission = SubmitAssignment.objects.get(student=student,submitted_assignment=assignment)
+        already_submitted = True
+    except:
+        already_submitted = False
+
+    if request.method == 'POST':
+        form = SubmitForm(request.POST, request.FILES)
+        if form.is_valid():
+            upload = form.save(commit=False)
+            upload.teacher = teacher
+            upload.student = student
+            upload.submitted_assignment = assignment
+            upload.save()
+            return HttpResponseRedirect(reverse('assignment_list',kwargs={'pk':teacher.pk}))
+    else:
+        form = SubmitForm()
+    return render(request,'app1/submit_assignment.html',{'form':form,'already_submitted':already_submitted})
+
+@login_required
+def submit_list(request,id):
+    teacher = request.user.Teacher
+    assignment = get_object_or_404(ClassAssignment, id=id)
+    submissions = SubmitAssignment.objects.filter(teacher=teacher,submitted_assignment=assignment)
+    return render(request,'app1/submit_list.html',{'submissions':submissions})

@@ -12,6 +12,7 @@
       <th scope="col">Assignment</th>
       <th scope="col">Created At</th>
       <th scope="col">Download</th>
+      <th scope="col">Submit</th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +22,8 @@
       <td>{{ assignment.teacher.name }}</td>
       <td>{{ assignment.assignment_name }}</td>
       <td>{{ assignment.created_at }}</td>
-      <td> <a href="{{ assignment.assignment.url }}" class="btn btn-primary" target='_blank'>Download</a> </td>
+      <td><a href="{{ assignment.assignment.url }}" class="btn btn-primary" target='_blank'>Download</a></td>
+      <td><a href="{% url 'submit_assignment' id=assignment.id %}" class="btn btn-primary">Upload Submission</a></td>
     </tr>
     {% endfor %}
   </tbody>

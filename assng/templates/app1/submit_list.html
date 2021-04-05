@@ -1,0 +1,31 @@
+{% extends 'app1/base.html' %}
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Student</th>
+      <th scope="col">Submitted At</th>
+      <th scope="col">Download</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for submission in submissions %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ submission.student.name }}</td>
+      <td>{{ submission.created_at }}</td>
+      <td><a href="{{ submission.submit.url }}" class="btn btn-primary" target='_blank'>Download</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+  </div>
+</div>
+
+{% endblock %}
