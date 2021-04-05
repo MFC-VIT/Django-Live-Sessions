@@ -1,0 +1,58 @@
+{% extends 'app1/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Assignment</th>
+      <th scope="col">Created At</th>
+      <th scope="col">Download</th>
+      <th scope="col">Submissions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for assignment in assignment_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ assignment.assignment_name }}</td>
+      <td>{{ assignment.created_at }}</td>
+      <td> <a href="{{ assignment.assignment.url }}" class="btn btn-primary">Download</a></td>
+      <td> <a href="{% url 'submit_list' id=assignment.id %}" class="btn btn-primary">View Submissions</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upload_new_assignment">
+    Upload New Assignment
+  </button>
+
+  </div>
+</div>
+
+<div class="modal fade" id="upload_new_assignment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upload New Assignment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form enctype="multipart/form-data" method="post" action="{% url 'upload_assignment' %}">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <input type="submit" name="" value="Submit" class="btn btn-primary">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

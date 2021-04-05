@@ -1,0 +1,35 @@
+{% extends 'app1/base.html' %}
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Teacher</th>
+      <th scope="col">Assignment</th>
+      <th scope="col">Created At</th>
+      <th scope="col">Download</th>
+      <th scope="col">Submit</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for assignment in assignment_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ assignment.teacher.name }}</td>
+      <td>{{ assignment.assignment_name }}</td>
+      <td>{{ assignment.created_at }}</td>
+      <td><a href="{{ assignment.assignment.url }}" class="btn btn-primary" target='_blank'>Download</a></td>
+      <td><a href="{% url 'submit_assignment' id=assignment.id %}" class="btn btn-primary">Upload Submission</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+  </div>
+</div>
+
+{% endblock %}

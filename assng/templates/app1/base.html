@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Assignment Portal</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      {% if user.is_authenticated %}
+      {% if user.is_teacher %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'all_student_list' %}">Student List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'class_students_list' %}">Class Student List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'teacher_assignment_list' %}">Assignment List</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'class_teacher_list' %}">Teacher List</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'teacher_signup' %}">Teacher</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'student_signup' %}">Student</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+
+{% block content %}
+{% endblock %}
+
+  </body>
+</html>
