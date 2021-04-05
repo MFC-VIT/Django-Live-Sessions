@@ -1,5 +1,5 @@
-# Django-Live-Session-2
-All Codes for Django live sesion - 2
+# Django-Live-Session-4
+All Codes for Django live sesion - 4
 
 ## Running this project
 To get this project up and running you should start by having Python installed on your computer. It's advised you create a virtual environment to store your projects dependencies separately. You can install virtualenv with
