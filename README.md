@@ -1,9 +1,47 @@
-# Django-Live-Series
-All course files for the Django playlist on Mozilla Firefox Club VIT YouTube channel.
+# Django-Live-Session-2
+All Codes for Django live sesion - 2
 
-## How to use these files
-Each session in the playlist has it's own branch in this repository. To see the code for that session, choose the appropriate branch. E.g. to see the code for session 1, checkout the Session-1 branch.
+## Running this project
+To get this project up and running you should start by having Python installed on your computer. It's advised you create a virtual environment to store your projects dependencies separately. You can install virtualenv with
 
-**important** - if you are cloning the repo to your desktop, you will need to perform a `pip install -r requirements.txt` to install any dependencies that the project may have at that point of the course.
+```
+pip install virtualenv
+```
 
-**Link to playlist on YouTube**
+Clone or download this repository and open it in your editor of choice. In a terminal (mac/linux) or windows terminal, run the following command in the base directory of this project
+
+```
+virtualenv env
+```
+
+That will create a new folder `env` in your project directory. Next activate it with this command on mac/linux:
+
+```
+source env/bin/active
+```
+
+Then install the project dependencies with
+
+```
+pip install -r requirements.txt
+```
+
+Now you can run the project with this command
+
+```
+python manage.py runserver
+```
+
+Create a new superuser to access the admi panel
+
+```
+python manage.py createsuperuser
+```
+
+---
+
+## Follow the tutorial
+
+This project is part of a [series on YouTube](https://www.youtube.com/channel/UCPMMpzYtoS0atGVKf_MlOyg) that teaches Django from basics to advanced in a 4 session series.
+
+---
