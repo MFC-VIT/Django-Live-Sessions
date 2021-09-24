@@ -7,3 +7,4 @@ Each session in the playlist has it's own branch in this repository. To see the 
 **important** - if you are cloning the repo to your desktop, you will need to perform a `pip install -r requirements.txt` to install any dependencies that the project may have at that point of the course.
 
 **Link to playlist on YouTube**
+https://youtube.com/playlist?list=PLToQS7BGMipbHQiO--YzAsQrUPDlXx0dm
